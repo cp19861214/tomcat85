@@ -1,4 +1,4 @@
-package org.sourcecode.tomcat.session;
+package com.orangefunction.tomcat.redissessions;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;

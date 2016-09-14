@@ -1,4 +1,4 @@
-package org.sourcecode.tomcat.session;
+package com.orangefunction.tomcat.redissessions;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -20,6 +20,7 @@ import org.sourcecode.redis.client.JedisClusterRedisAccessor;
 import org.sourcecode.redis.client.JedisRedisAccessor;
 import org.sourcecode.redis.client.RedisAccessor;
 import org.sourcecode.redis.client.RedisConstants;
+import org.sourcecode.tomcat.session.RedisSessionIdGenerator;
 
 import redis.clients.jedis.JedisPoolConfig;
 import redis.clients.jedis.Protocol;
