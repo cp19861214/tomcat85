@@ -3,6 +3,7 @@ CATALINA_OPTS="$JAVA_OPTS -Djava.library.path=$CATALINA_HOME/lib  -Xmx1024m -XX:
 #args="-J-Xms256m -J-Xmx768m"
 
 CATALINA_PID=$CATALINA_BASE/logs/catalina.pid
+UMASK=0113
 
 #CATALINA_OPTS="$JAVA_OPTS -Djava.library.path=$CATALINA_HOME/lib -Xmx1g  -server  -Dorg.apache.catalina.loader.WebappClassLoader.ENABLE_CLEAR_REFERENCES=true "
 #CATALINA_OPTS="$JAVA_OPTS -Djava.library.path=$CATALINA_HOME/lib -Xmx1g  -XX:+UseParNewGC -XX:+UseConcMarkSweepGC -XX:SurvivorRatio=2 -XX:NewRatio=8  -server  -Dorg.apache.catalina.loader.WebappClassLoader.ENABLE_CLEAR_REFERENCES=true "
