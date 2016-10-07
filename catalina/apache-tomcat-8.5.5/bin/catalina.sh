@@ -256,7 +256,7 @@ fi
 
 # Set UMASK unless it has been overridden
 if [ -z "$UMASK" ]; then
-    UMASK="0027"
+    UMASK="0002"
 fi
 umask $UMASK
 
