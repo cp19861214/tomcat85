@@ -30,14 +30,18 @@ public class JedisClusterRedisAccessor implements RedisAccessor {
 
 	private int maxRedirections = 6;
 
+	private String password;
+
 	public JedisClusterRedisAccessor() {
 
 	}
 
-	public JedisClusterRedisAccessor(JedisPoolConfig poolConfig, int maxRedirections, int timeout, String nodes) {
+	public JedisClusterRedisAccessor(JedisPoolConfig poolConfig, int maxRedirections, int timeout, String nodes,
+			String password) {
 		this.jedisPoolConfig = poolConfig;
 		this.maxRedirections = maxRedirections;
 		this.timeout = timeout;
+		this.password = password;
 		this.nodes = nodes;
 	}
 
@@ -156,9 +160,18 @@ public class JedisClusterRedisAccessor implements RedisAccessor {
 
 	}
 
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public static void main(String[] args) {
 		String nodes = "172.16.97.5:7000,172.16.97.5:7001,172.16.97.10:7002,172.16.97.10:7003,172.16.97.18:7004,172.16.97.18:7005";
-		JedisClusterRedisAccessor jedis = new JedisClusterRedisAccessor(new DefaultJedisPoolConfig(), 6, 2000, nodes);
+		JedisClusterRedisAccessor jedis = new JedisClusterRedisAccessor(new DefaultJedisPoolConfig(), 6, 2000, nodes,
+				null);
 		jedis.init("");
 		String key = "testx";
 		String r = jedis.set(key.getBytes(), "1".getBytes(), 5);

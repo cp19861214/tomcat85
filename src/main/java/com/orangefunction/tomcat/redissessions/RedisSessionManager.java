@@ -503,9 +503,11 @@ public class RedisSessionManager extends ManagerBase implements Lifecycle {
 		try {
 
 			if (RedisConstants.MODE_CLUSTER.equals(mode)) {
-				redisAccessor = new JedisClusterRedisAccessor(connectionPoolConfig, maxRedirections, timeout, host);
+				redisAccessor = new JedisClusterRedisAccessor(connectionPoolConfig, maxRedirections, timeout, host,
+						null);
 			} else {
-				redisAccessor = new JedisRedisAccessor(connectionPoolConfig, masterName, host, port, database);
+				redisAccessor = new JedisRedisAccessor(connectionPoolConfig, masterName, host, port, password,
+						database);
 			}
 			redisAccessor.init(mode);
 

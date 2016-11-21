@@ -30,14 +30,18 @@ public class JedisRedisAccessor implements RedisAccessor {
 
 	private String masterName;
 
+	private String password;
+
 	public JedisRedisAccessor() {
 
 	}
 
-	public JedisRedisAccessor(JedisPoolConfig jedisPoolConfig, String masterName, String host, int port, int database) {
+	public JedisRedisAccessor(JedisPoolConfig jedisPoolConfig, String masterName, String host, int port,
+			String password, int database) {
 		this.jedisPoolConfig = jedisPoolConfig;
 		this.host = host;
 		this.port = port;
+		this.password = password;
 		this.database = database;
 		this.masterName = masterName;
 	}
@@ -163,7 +167,7 @@ public class JedisRedisAccessor implements RedisAccessor {
 	@Override
 	public void init(String mode) {
 		if (RedisConstants.MODE_SIGNLE.equals(mode)) {
-			jedisPool = new JedisPool(jedisPoolConfig, host, port, Protocol.DEFAULT_TIMEOUT, null, database);
+			jedisPool = new JedisPool(jedisPoolConfig, host, port, Protocol.DEFAULT_TIMEOUT, password, database);
 		} else {
 			jedisPool = new JedisSentinelPool(masterName, asSentinelSet(host), jedisPoolConfig,
 					Protocol.DEFAULT_TIMEOUT, null, database);
@@ -237,8 +241,16 @@ public class JedisRedisAccessor implements RedisAccessor {
 		this.masterName = masterName;
 	}
 
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public static void main(String[] args) {
-		RedisAccessor ra = new JedisRedisAccessor(new JedisPoolConfig(), "mymaster", "172.16.97.5", 6379, 3);
+		RedisAccessor ra = new JedisRedisAccessor(new JedisPoolConfig(), "mymaster", "172.16.97.5", 6379, null, 3);
 		ra.init("sentinel");
 		String key = "abc";
 		String result = ra.set(key.getBytes(), "a".getBytes(), 5);
